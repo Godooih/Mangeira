@@ -39,3 +39,72 @@ Siga os passos abaixo para executar o servidor de desenvolvimento na sua máquin
 ```bash
 git clone [https://github.com/SEU-USUARIO/mangeira-ecommerce.git](https://github.com/SEU-USUARIO/mangeira-ecommerce.git)
 cd mangeira-ecommerce
+2. Crie e ative o ambiente virtual (Recomendado)
+Bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Linux/Mac
+python3 -m venv venv
+source venv/bin/activate
+3. Instale as dependências
+Bash
+pip install django
+4. Configure o Banco de Dados
+Bash
+python manage.py makemigrations
+python manage.py migrate
+5. Crie um Superusuário (Admin)
+Para acessar o painel administrativo:
+Bash
+python manage.py createsuperuser
+# Siga as instruções para definir usuário e senha
+6. Inicie o Servidor
+Bash
+python manage.py runserver
+O projeto estará rodando em: http://127.0.0.1:8000/
+________________________________________
+🔌 Documentação da API
+O backend fornece endpoints JSON para alimentar o frontend:
+🛍️ Vitrine (Público)
+Retorna todos os produtos ativos, com cálculo de parcelas e lista de peças inclusas.
+•	URL: /api/vitrine/
+•	Método: GET
+•	Exemplo de Resposta:
+JSON
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Poltrona Mole 1960",
+      "categoria": "Sala de Estar",
+      "preco": 15000.00,
+      "parcelamento": "10x de R$ 1500.00 s/juros",
+      "itens_inclusos": [
+         {"nome": "Estrutura", "medidas": "100x80", "peso": "15kg"}
+      ]
+    }
+  ]
+}
+🛒 Carrinho (Privado)
+Acesso exclusivo para usuários logados. Retorna erro ou redireciona para login se não autenticado.
+•	URL: /api/carrinho/
+•	Método: GET
+•	Autenticação: Requerida (Session/Login)
+________________________________________
+🗂️ Estrutura do Projeto
+•	mangeira/: Configurações globais do projeto (settings, urls principais).
+•	loja/: Aplicativo principal contendo a lógica de negócio.
+o	models.py: Definição das tabelas (Produto, Cliente, Pedido).
+o	views.py: Lógica das APIs e segurança.
+o	admin.py: Customização do painel administrativo.
+•	db.sqlite3: Banco de dados local.
+✒️ Autor
+•	Desenvolvedor: [Seu Nome Aqui]
+•	Contexto: Projeto Acadêmico - Aplicações Web
+________________________________________
+
+### Dica Extra para o GitHub:
+Se você quiser deixar o repositório ainda mais profissional, tire um "print" da tela do Admin (aquela onde aparecem os produtos e as peças que configuramos) e coloque na pasta do projeto. Depois, adicione essa imagem no README. Isso atrai muito a atenção de quem visita o perfil!
+
